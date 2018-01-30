@@ -1,0 +1,130 @@
+Refernce URL's
+https://programmingwithmosh.com/angular/angular-4-tutorial/
+http://www.dotnetcurry.com/angularjs/1366/angular-4-app-typescript-bootstrap
+https://stackoverflow.com/questions/43557321/angular-4-how-to-include-bootstrap
+http://plnkr.co/edit/zrzVF8qKl8EvKKp2Qt45?p=preview
+http://www.thejavageek.com/2017/04/18/angular-4-crud-example/
+
+
+Services with http
+https://medium.com/craft-academy/connecting-an-api-to-an-angular-4-front-end-application-e0fc9ea33202
+https://java2practice.com/2017/11/03/angular-4-service-example/
+
+Services
+
+https://yogeshdotnet.com/angular-4-services-with-example/
+
+
+Step 1. Set up the Development Environment
+npm install -g @angular/cli
+
+Step 2. Create a new project
+ng new my-app
+
+
+Step 3: Serve the application
+
+cd my-app
+ng serve --open
+
+
+Step 4: Creating Application with bootstrap and jquery
+
+
+Installing bootstrap [bootstrap@4.0.0-beta.3]
+npm install -–save bootstrap@next
+
+Installing jquery
+npm install jquery --save
+
+Step 5:open .angular-cli.json
+
+
+"styles": [   
+    "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "styles.css"
+  ],
+  "scripts": [  
+
+    "../node_modules/jquery/dist/jquery.min.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+    "../node_modules/popper.js/dist/umd/popper.min.js"
+  ]
+  
+Step 5: Creating service 
+
+And import some rxjs. These are reactive extension java script. Rxjs is a reactive streams library that allows you to work with asynchronous data streams. RxJS can be used both in the browser or in the server-side using Node.js. We will use some methods from the Rxjs in angular services like map and observable and catch. We will use these in the services.
+
+Don’t instantiated the service with new keyword, it will create error prone and memory leak.
+
+
+ng generate service hero : Standard way to generate service 
+ng generate service hero --module=app : directly appending in module using CLI
+
+
+ng g class Employee : Creating a class file in 
+
+
+
+
+
+
+
+
+http://plnkr.co/edit/zrzVF8qKl8EvKKp2Qt45?p=preview
+=======
+
+
+import 'rxjs/add/operator/map';
+ 
+import 'rxjs/add/operator/catch';
+ 
+import { Observable } from 'rxjs/Observable';
+
+import { Injectable } from '@angular/core';
+import {Http, Response, RequestOptions, Headers} from '@angular/http';
+ 
+ 
+ 
+import { Employee } from './employee';
+
+@Injectable()
+export class ReferenceService {
+/*departments = [];
+  private apiURL = 'assets/service.json';
+  constructor(private http:Http) {
+   // this.getallemployeelist();
+   //return http.get(this.apiURL).map((res:Response) => res.json());
+    http.get('assets/mockservice.json')
+      .map((res: Response) => res.json())
+      .subscribe((departments: Array<any>) => this.departments = departments);
+  }  */
+  // getallemployeelist(){return this.http.get('http://localhost:4200/assets/service.json').map((res:Response =>res.json());
+      
+ 
+// Api Full path like, http://localhost:4200/assets/service.json
+ 
+
+   // }
+
+
+constructor(private http: Http) { }
+  
+getAllEmployees(): Observable< Employee[] > {
+ 
+try {
+ 
+return this.http.get('assets/mockservice.json') .map((res:Response) => res.json());
+ 
+
+ 
+}   catch (error) { console.log(error); }  }
+/* 
+extractData(res: Response) {
+ 
+const body = res.json();
+ 
+return body || {};   }
+ 
+handleError(error: any) { return Observable.throw(error); }*/
+}
